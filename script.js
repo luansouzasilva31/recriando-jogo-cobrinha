@@ -8,6 +8,7 @@ snake[0] = {
 }
 
 let direction = "right";
+
 let food = {
     x: Math.floor(Math.random()*15 + 1) * box,
     y: Math.floor(Math.random()*15 + 1) * box
@@ -40,6 +41,8 @@ function update (event){
 
 }
 
+
+
 function iniciarJogo(){    
 
     if(snake[0].x > 15*box && direction == "right") snake[0].x = 0;
@@ -54,17 +57,27 @@ function iniciarJogo(){
         }
     }
 
+   
     criarBG();
+    //console.log(snake[0].x, snake[0].y);
+    //console.log(box)
     criarCobrinha();
     drawFood();
+
+    console.log(snake[0]);
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
+    
+    console.log(snakeX, snakeY);
+
     if(direction == "right") snakeX += box;
     if(direction == "left") snakeX -= box;
     if(direction == "up") snakeY -= box;
-    if(direction == "down") snakeY += box;
+    if (direction == "down") snakeY += box;
+
+    //console.log(snakeX, snakeY);
 
     if(snakeX != food.x || snakeY !=food.y){
         snake.pop();
@@ -81,6 +94,7 @@ function iniciarJogo(){
     }
 
     snake.unshift(newHead);
+    
 }
 
 let jogo = setInterval(iniciarJogo, 100);
