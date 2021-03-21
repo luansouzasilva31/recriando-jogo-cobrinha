@@ -19,9 +19,9 @@ function criarBG(){
 }
 
 function criarCobrinha(){
-    for(i=0;i < snake.length; i++){
+    for(i=0; i < snake.length; i++){
         context.fillStyle = "green";
-        context.fillRect(snake[i].x, snake[i].y, box);
+        context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
 
@@ -54,10 +54,17 @@ function iniciarJogo(){
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    if(direction == "right") snakeX+=box;
-    if(direction == "left") snakeX-=box;
-    if(direction == "up") snakeY -=box;
-    if(direction == "down") snakeY +=box;
+    if(direction == "right") snakeX += box;
+    if(direction == "left") snakeX -= box;
+    if(direction == "up") snakeY -= box;
+    if(direction == "down") snakeY += box;
+
+    if(snakeX != food.x || snakeY !=food.y){
+        snake.pop();
+    }else{
+        food.x = Math.floor(Math.random()*15 + 1) * box;
+        food.y = Math.floor(Math.random()*15 + 1) * box;
+    }
 
     snake.pop();
 
@@ -66,8 +73,8 @@ function iniciarJogo(){
         y: snakeY
     }
 
-    snake.unshift(newHead)
+    snake.unshift(newHead);
 }
 
-let jogo = setInterval(iniciarJogo(), 100);
+let jogo = setInterval(iniciarJogo, 100);
 
